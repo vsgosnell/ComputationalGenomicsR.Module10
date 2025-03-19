@@ -65,3 +65,31 @@ tips_per_day <- tips_per_day[c("Thur", "Fri", "Sat", "Sun")]
 # Reorder
 tips$day <- factor(tips$day, c("Thur", "Fri", "Sat", "Sun"))
 
+
+
+
+
+
+ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
+  geom_bar(colour="black", stat="identity",
+           position=position_dodge(),
+           size=.3) +                       
+  scale_fill_hue(name="Sex of payer") +     
+  xlab("Time of day") + ylab("Total bill") +
+  ggtitle("Average bill for 2 people") +    
+  theme_bw()
+
+
+
+par(cex=1.2, cex.axis=1.1)
+barplot(dat1mat, beside = TRUE, border=NA, col=mf_col,
+        main="Average Bill for Two People", yaxt="n")
+axis(2, at=axTicks(2), labels=sprintf("$%s", axTicks(2)),
+     las=1, cex.axis=0.8)
+grid(NA, NULL, lwd=1, lty=1, col="#ffffff")
+abline(0, 0)
+text(1.5, dat1mat["Female", "Lunch"], "Female", pos=3)
+text(2.5, dat1mat["Male", "Lunch"], "Male", pos=3)
+text(1.5, dat1mat["Female", "Lunch"]+0.7, "SEX OF PAYER",
+     pos=3, cex=0.75)
+
